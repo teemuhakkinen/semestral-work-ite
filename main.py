@@ -1,4 +1,5 @@
 import math
+import random
 def read_players(filename):
     """
     Reads player names from a given text file.
@@ -28,14 +29,44 @@ def calculate_byes(num_players):
 
     return byes
 
+def create_matchups(players, byes_count):
+    """
+    Shuffles players and creates the first round matchups.
+    Assigns 'Bye' to the required number of players.
+    """
+    # Tehdään kopio listasta, jotta alkuperäinen ei tuhoudu, ja sekoitetaan se
+    shuffled_players = players.copy()
+    random.shuffle(shuffled_players)
+
+    matchups = []
+
+    # 1. Jaetaan ensin vapaataipaleet (Byes)
+    for i in range(byes_count):
+        lucky_player = shuffled_players.pop(0)
+        matchups.append((lucky_player, "BYE"))
+
+    # 2. Jaetaan loput pelaajat normaaleihin ottelupareihin
+    while len(shuffled_players) >= 2:
+        player1 = shuffled_players.pop(0)
+        player2 = shuffled_players.pop(0)
+        matchups.append((player1, player2))
+
+    return matchups
+
+
 if __name__ == "__main__":
     tournament_players = read_players("players")
     player_count = len(tournament_players)
-    byes_needed = calculate_byes(player_count)
 
-    print("Tournament players:")
-    for player in tournament_players:
-        print(f"- {player}")
+    if player_count < 2:
+        print("Not enough players for a tournament!")
+    else:
+        byes_needed = calculate_byes(player_count)
+        first_round = create_matchups(tournament_players, byes_needed)
 
-    print(f"\nTotal players: {player_count}")
-    print(f"Byes needed: {byes_needed}")
+        print("\n--- FIRST ROUND MATCHUPS ---")
+        for index, match in enumerate(first_round, 1):
+            if match[1] == "BYE":
+                print(f"Match {index}: {match[0]} gets a BYE (Advances automatically)")
+            else:
+                print(f"Match {index}: {match[0]} VS {match[1]}")
