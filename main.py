@@ -43,7 +43,7 @@ def create_matchups(players, byes_count):
     # 1. Jaetaan ensin vapaataipaleet (Byes)
     for i in range(byes_count):
         lucky_player = shuffled_players.pop(0)
-        matchups.append((lucky_player, "BYE"))
+        matchups.append((lucky_player, None))
 
     # 2. Jaetaan loput pelaajat normaaleihin ottelupareihin
     while len(shuffled_players) >= 2:
@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
         print("\n--- FIRST ROUND MATCHUPS ---")
         for index, match in enumerate(first_round, 1):
-            if match[1] == "BYE":
+            if match[1] == None:
                 print(f"Match {index}: {match[0]} gets a BYE (Advances automatically)")
             else:
                 print(f"Match {index}: {match[0]} VS {match[1]}")
