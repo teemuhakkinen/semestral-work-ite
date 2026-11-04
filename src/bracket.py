@@ -37,5 +37,3 @@ def create_matchups(players, byes_count):
 
     return matchups
 
-MIN_PLAYERS_FOR_GROUPS = 8
-MAX_BYE_SHARE = 0.25
