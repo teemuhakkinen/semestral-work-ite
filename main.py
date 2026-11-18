@@ -1,6 +1,6 @@
 from src.players import read_players
 from src.bracket import calculate_byes, create_matchups
-from src.planner import recommend_format
+from src.planner import recommend_format, plan_groups, assign_groups
 
 
 def main():
@@ -25,7 +25,13 @@ def main():
             else:
                 print(f"Match {index}: {match[0]} VS {match[1]}")
     else:
-        print("Group stage is not implemented yet.")
+        group_sizes = plan_groups(len(players))
+        groups = assign_groups(players, group_sizes)
+
+        print("\n--- GROUP STAGE ---")
+        print(f"{len(groups)} groups, the best 2 of each advance")
+        for index, group in enumerate(groups, 1):
+            print(f"Group {index}: {', '.join(group)}")
 
 
 if __name__ == "__main__":
