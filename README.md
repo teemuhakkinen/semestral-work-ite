@@ -12,7 +12,7 @@ when the player count is not a power of two.
 1. Install Python 3.11 or newer.
 2. Clone the repository:
    ```
-   git clone https://github.com/<your-username>/semestral-work-ite.git
+   git clone https://github.com/teemuhakkinen/semestral-work-ite.git
    cd semestral-work-ite
    ```
 3. Install dependencies (only needed for running tests):
