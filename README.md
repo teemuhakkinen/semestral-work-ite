@@ -1,61 +1,71 @@
-# semestral-work-ite
 # Tournament Bracket Planner
 
 ## Purpose
-A small Python program that reads player names from a text file,
-recommends a tournament format (knockout bracket or group stage) based on
-the number of players, and generates the first round matchups of a
-knockout bracket. Players are shuffled randomly, and byes are given
-when the player count is not a power of two.
+
+A simple Python program that helps tournament organizers choose a suitable tournament format based on the number of players.
+
+The program recommends either a knockout bracket or a group stage and randomly assigns players to matches or groups.
 
 ## Installation
-1. Install Python 3.11 or newer.
-2. Clone the repository:
-   ```
-   git clone https://github.com/teemuhakkinen/semestral-work-ite.git
-   cd semestral-work-ite
-   ```
-3. Install dependencies (only needed for running tests):
-   ```
-   python -m pip install -r requirements.txt
-   ```
+
+Requirements: Python 3.11 or newer.
+
+Clone the repository:
+
+```bash
+git clone https://github.com/teemuhakkinen/semestral-work-ite.git
+cd semestral-work-ite
+```
+
+Install the testing dependency:
+
+```bash
+python -m pip install -r requirements.txt
+```
 
 ## Usage
-1. Create a text file named `players` in the project root, one name per line.
-   Empty lines are ignored.
-2. Run the program from the project root:
-   ```
-   python main.py
-   ```
 
-Example input:
-```
-Anna
-Bob
-Cecil
-Dan
-Eve
+1. Add player names to the `players` file, one name per line.
+2. Run the program:
+
+```bash
+python main.py
 ```
 
-Example output (matchups are random):
-```
-Recommended format: bracket (...)
+The program displays the recommended tournament format, the reason for its selection, and the generated matchups or groups.
 
---- FIRST ROUND MATCHUPS ---
-Match 1: Eve gets a BYE (Advances automatically)
-...
-```
+## Program Logic
+
+- Fewer than 2 players: error.
+- Fewer than 8 players: knockout bracket.
+- Otherwise, if more than 25% of the bracket slots are byes, a group stage is recommended.
+- Groups contain 3–6 players, with a target size of 4.
+
+The two best players from each group are intended to advance.
+
+## Diagrams
+
+- [Program Flowchart](docs/diagrams/program_flow.png)
+- [Module Diagram](docs/diagrams/module_diagram.png)
+- [Sequence Diagram](docs/diagrams/sequence_diagram.png)
 
 ## Testing
-Run all tests with `python test_main.py`.
-See [docs/tests.md](docs/tests.md) for the testing approach.
+
+Run all automated tests:
+
+```bash
+python test_main.py
+```
+
+See [tests.md](docs/tests.md) for the testing approach and examples.
 
 ## Limitations
-- Only the first round is generated.
-- If the group stage is recommended, the program does not generate groups yet.
-- The player file name is fixed.
-- Duplicate names are not detected.
-- Results are not entered, so the bracket does not update.
+
+- Only the first knockout round is generated.
+- Individual group matches are not generated.
+- Match results are not recorded.
+- The input filename is fixed.
 
 ## License
-MIT, see [LICENSE](LICENSE).
+
+MIT License. See [LICENSE](LICENSE).
