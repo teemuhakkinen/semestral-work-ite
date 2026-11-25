@@ -1,41 +1,37 @@
 # Testing
 
-## Approach
-Tests are written with pytest and run with `python test_main.py`.
-The logic is split into small pure functions, so each can be tested
-without user input or files, except `read_players`, which uses a
-temporary file.
+## Testing Approach
 
-The program uses random shuffling, so tests for `create_matchups`
-check properties that are always true (every player appears exactly
-once, the number of byes is correct, the input list is not modified)
-instead of exact pairings.
+The program uses pytest to test its main functions separately.
 
-## Test files
-- `tests/test_planner.py`: `recommend_format`
-- `tests/test_bracket.py`: `calculate_byes`, `create_matchups`, `read_players`
+The tests verify player file reading, bye calculations, tournament format recommendations, matchups and group creation.
 
-## Sample inputs and outputs
+Since player assignment is random, the tests check that every player appears exactly once instead of expecting specific matchups.
 
-### calculate_byes
-| Players | Byes |
-|---|---|
-| 1 | 0 |
-| 3 | 1 |
-| 5 | 3 |
-| 8 | 0 |
-| 9 | 7 |
+## Test Examples
 
-### recommend_format
-| Players | Format | Reason |
+| Function | Input | Expected output |
 |---|---|---|
-| 5 | bracket | fewer than 8 players |
-| 9 | groups | 7 of 16 slots would be byes (over 25 %) |
-| 12 | bracket | boundary case, exactly 25 % |
-| 17 | groups | 15 of 32 slots would be byes |
-| 1 | ValueError | at least 2 players required |
+| `calculate_byes` | 8 players | 0 byes |
+| `calculate_byes` | 5 players | 3 byes |
+| `recommend_format` | 9 players | Groups |
+| `recommend_format` | 12 players | Bracket |
+| `recommend_format` | 1 player | ValueError |
+| `plan_groups` | 17 players | [5, 4, 4, 4] |
+| `read_players` | Missing file | Empty list |
+| `create_matchups` | 5 players, 3 byes | 4 matchups, including 3 byes |
+| `assign_groups` | 6 players, sizes [3, 3] | Two groups of 3 players |
 
-## Coverage
-25 tests in total. Edge cases tested: fewer than two players, exactly 25 %
-byes, empty lines and extra whitespace in the player file.
-Not tested: the printed output of `main()`.
+## Running the Tests
+
+Run all tests from the project root:
+
+```bash
+python test_main.py
+```
+
+## Test Coverage
+
+The tests cover normal inputs, boundary cases, invalid inputs and random player assignment.
+
+All main modules are tested, but terminal output is not tested automatically.
