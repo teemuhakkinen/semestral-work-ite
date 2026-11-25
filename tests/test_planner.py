@@ -2,7 +2,7 @@
 
 import pytest
 
-from src.planner import recommend_format
+from src.planner import recommend_format, plan_groups, assign_groups
 
 
 # Each tuple is one test case: (number of players, expected format).
