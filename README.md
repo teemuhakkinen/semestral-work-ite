@@ -45,10 +45,9 @@ The two best players from each group are intended to advance.
 
 ## Diagrams
 
-- [Program Flowchart](docs/diagrams/program_flow.png)
-- [Module Diagram](docs/diagrams/module_diagram.png)
-- [Sequence Diagram](docs/diagrams/sequence_diagram.png)
-
+- [Program Flowchart](diagrams/Flowchart.png)
+- [Module Diagram](diagrams/Module.png)
+- [Sequence Diagram](diagrams/Sequence.png)
 ## Testing
 
 Run all automated tests:
