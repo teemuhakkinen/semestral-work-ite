@@ -1,3 +1,4 @@
+"""Functions for creating knockout tournament matchups."""
 import math
 import random
 def calculate_byes(num_players):

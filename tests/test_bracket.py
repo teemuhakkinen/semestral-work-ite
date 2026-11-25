@@ -69,3 +69,4 @@ def test_read_players_missing_file_returns_empty_list(tmp_path):
     missing = tmp_path / "does_not_exist.txt"
 
     assert read_players(str(missing)) == []
+

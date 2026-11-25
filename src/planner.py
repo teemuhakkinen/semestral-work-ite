@@ -1,6 +1,5 @@
-import random
-
 """Decides which tournament format suits a given number of players."""
+import random
 
 from src.bracket import calculate_byes
 

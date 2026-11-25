@@ -1,3 +1,4 @@
+"""Functions for reading player names from a file."""
 def read_players(filename):
     """
     Reads player names from a given text file.

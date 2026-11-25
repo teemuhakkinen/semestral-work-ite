@@ -1,9 +1,12 @@
+"""Main entry point for the tournament planner."""
+
 from src.players import read_players
 from src.bracket import calculate_byes, create_matchups
 from src.planner import recommend_format, plan_groups, assign_groups
 
 
 def main():
+    """Read players, recommend a format and display the tournament plan."""
     players = read_players("players")
 
     try:
